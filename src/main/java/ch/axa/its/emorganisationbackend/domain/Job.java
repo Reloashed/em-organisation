@@ -1,6 +1,5 @@
 package ch.axa.its.emorganisationbackend.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +10,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
+@Table(name = "job")
 public class Job {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -32,9 +32,9 @@ public class Job {
 
   @ManyToMany
   @JoinTable(
-          name = "job_match",
+          name = "job_game",
           joinColumns = @JoinColumn(name = "job_id"),
-          inverseJoinColumns = @JoinColumn(name = "match_id")
+          inverseJoinColumns = @JoinColumn(name = "game_id")
   )
   private Set<Game> games = new HashSet<>();
 }

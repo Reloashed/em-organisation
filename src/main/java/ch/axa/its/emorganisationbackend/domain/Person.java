@@ -1,6 +1,5 @@
 package ch.axa.its.emorganisationbackend.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +10,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
+@Table(name = "person")
 public class Person {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -28,5 +28,5 @@ public class Person {
   private String phoneNumber;
 
   @ManyToMany(mappedBy = "people")
-  private Set<Job> personJobSet = new HashSet<>();
+  private Set<Job> jobs = new HashSet<>();
 }

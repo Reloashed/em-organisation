@@ -46,15 +46,21 @@ public class Dataloader implements ApplicationRunner {
     person.setLastname("Muster");
     person.setEmail("max.muster@gmail.com");
     person.setPhoneNumber("0774543288");
-    Set<Job> jobSet = new HashSet<>();
-    jobSet.add(job);
-    person.setPersonJobSet(jobSet);
     personRepository.save(person);
 
     Game game = new Game();
     game.setStadium("Hallenstadion Zuerich");
     game.setDate(LocalDate.now());
-    game.setJobGameSet(jobSet);
     gameRepository.save(game);
+
+
+    Set<Game> games = new HashSet<>();
+    games.add(game);
+    job.setGames(games);
+
+    Set<Person> people = new HashSet<>();
+    people.add(person);
+    job.setPeople(people);
+    jobRepository.save(job);
   }
 }

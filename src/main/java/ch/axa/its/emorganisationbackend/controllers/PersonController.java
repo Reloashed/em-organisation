@@ -3,9 +3,11 @@ package ch.axa.its.emorganisationbackend.controllers;
 import ch.axa.its.emorganisationbackend.domain.Person;
 import ch.axa.its.emorganisationbackend.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/people")
@@ -16,5 +18,32 @@ public class PersonController {
   @GetMapping
   public Iterable<Person> getAllPeople() {
     return personRepository.findAll();
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<Person> getPersonById(@PathVariable String id) {
+    Optional<Person> personOpt = personRepository.findById(id);
+    if (personOpt.isPresent()) {
+      return ResponseEntity.ok(personOpt.get());
+    }
+
+    return ResponseEntity.notFound().build();
+  }
+
+  @PostMapping
+  public ResponseEntity<Person> createPerson(@RequestBody Person person) {
+    return ResponseEntity.status(HttpStatus.CREATED).body(personRepository.save(person));
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<Person> updatePerson(@PathVariable String id, @RequestBody Person person) {
+    person.setId(id);
+    return ResponseEntity.status(HttpStatus.CREATED).body(personRepository.save(person));
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Person> deletePerson(@PathVariable String id) {
+    personRepository.deleteById(id);
+    return ResponseEntity.noContent().build();
   }
 }
