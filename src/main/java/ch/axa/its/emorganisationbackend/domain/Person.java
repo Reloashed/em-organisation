@@ -1,5 +1,6 @@
 package ch.axa.its.emorganisationbackend.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,7 @@ public class Person {
   private String email;
 
   @Column(name = "phone_number", nullable = false)
-  private long phoneNumber;
+  private String phoneNumber;
 
   @ManyToMany(mappedBy = "people")
   private Set<Job> personJobSet = new HashSet<>();

@@ -1,5 +1,6 @@
 package ch.axa.its.emorganisationbackend.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
