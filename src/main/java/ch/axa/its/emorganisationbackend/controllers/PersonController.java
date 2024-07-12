@@ -1,6 +1,8 @@
 package ch.axa.its.emorganisationbackend.controllers;
 
+import ch.axa.its.emorganisationbackend.domain.Job;
 import ch.axa.its.emorganisationbackend.domain.Person;
+import ch.axa.its.emorganisationbackend.domain.Task;
 import ch.axa.its.emorganisationbackend.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,17 @@ public class PersonController {
     Optional<Person> personOpt = personRepository.findById(id);
     if (personOpt.isPresent()) {
       return ResponseEntity.ok(personOpt.get());
+    }
+
+    return ResponseEntity.notFound().build();
+  }
+
+  @GetMapping("/{id}/jobs")
+  public ResponseEntity<Iterable<Job>> getJobsFromPerson(@PathVariable String id) {
+    Optional<Person> personOpt = personRepository.findById(id);
+    if (personOpt.isPresent()) {
+      Person person = personOpt.get();
+      return ResponseEntity.ok(person.getJobs());
     }
 
     return ResponseEntity.notFound().build();

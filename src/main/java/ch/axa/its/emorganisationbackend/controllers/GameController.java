@@ -1,6 +1,8 @@
 package ch.axa.its.emorganisationbackend.controllers;
 
 import ch.axa.its.emorganisationbackend.domain.Game;
+import ch.axa.its.emorganisationbackend.domain.Job;
+import ch.axa.its.emorganisationbackend.domain.Task;
 import ch.axa.its.emorganisationbackend.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,17 @@ public class GameController {
     Optional<Game> gameOpt = gameRepository.findById(id);
     if (gameOpt.isPresent()) {
       return ResponseEntity.ok(gameOpt.get());
+    }
+
+    return ResponseEntity.notFound().build();
+  }
+
+  @GetMapping("/{id}/jobs")
+  public ResponseEntity<Iterable<Job>> getJobsFromGame(@PathVariable String id) {
+    Optional<Game> gameOpt = gameRepository.findById(id);
+    if (gameOpt.isPresent()) {
+      Game game = gameOpt.get();
+      return ResponseEntity.ok(game.getJobs());
     }
 
     return ResponseEntity.notFound().build();

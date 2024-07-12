@@ -1,11 +1,17 @@
 package ch.axa.its.emorganisationbackend.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "task")
 public class Task {
@@ -18,6 +24,7 @@ public class Task {
 
   private String description;
 
+  @JsonIgnore
   @ManyToOne
   private Job job;
 }

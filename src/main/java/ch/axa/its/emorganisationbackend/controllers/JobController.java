@@ -1,6 +1,10 @@
 package ch.axa.its.emorganisationbackend.controllers;
 
+import ch.axa.its.emorganisationbackend.domain.Game;
 import ch.axa.its.emorganisationbackend.domain.Job;
+import ch.axa.its.emorganisationbackend.domain.Person;
+import ch.axa.its.emorganisationbackend.domain.Task;
+import ch.axa.its.emorganisationbackend.repositories.GameRepository;
 import ch.axa.its.emorganisationbackend.repositories.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +29,39 @@ public class JobController {
     Optional<Job> jobOpt = jobRepository.findById(id);
     if (jobOpt.isPresent()) {
       return ResponseEntity.ok(jobOpt.get());
+    }
+
+    return ResponseEntity.notFound().build();
+  }
+
+  @GetMapping("/{id}/games")
+  public ResponseEntity<Iterable<Game>> getGamesFromJob(@PathVariable String id) {
+    Optional<Job> jobOpt = jobRepository.findById(id);
+    if (jobOpt.isPresent()) {
+      Job job = jobOpt.get();
+      return ResponseEntity.ok(job.getGames());
+    }
+
+    return ResponseEntity.notFound().build();
+  }
+
+  @GetMapping("/{id}/people")
+  public ResponseEntity<Iterable<Person>> getPeopleFromJob(@PathVariable String id) {
+    Optional<Job> jobOpt = jobRepository.findById(id);
+    if (jobOpt.isPresent()) {
+      Job job = jobOpt.get();
+      return ResponseEntity.ok(job.getPeople());
+    }
+
+    return ResponseEntity.notFound().build();
+  }
+
+  @GetMapping("/{id}/tasks")
+  public ResponseEntity<Iterable<Task>> getTasksFromJob(@PathVariable String id) {
+    Optional<Job> jobOpt = jobRepository.findById(id);
+    if (jobOpt.isPresent()) {
+      Job job = jobOpt.get();
+      return ResponseEntity.ok(job.getTasks());
     }
 
     return ResponseEntity.notFound().build();
