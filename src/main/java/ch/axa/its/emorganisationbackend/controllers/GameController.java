@@ -4,6 +4,7 @@ import ch.axa.its.emorganisationbackend.domain.Game;
 import ch.axa.its.emorganisationbackend.domain.Job;
 import ch.axa.its.emorganisationbackend.domain.Task;
 import ch.axa.its.emorganisationbackend.repositories.GameRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,12 +46,12 @@ public class GameController {
   }
 
   @PostMapping
-  public ResponseEntity<Game> createGame(@RequestBody Game game) {
+  public ResponseEntity<Game> createGame(@Valid @RequestBody Game game) {
     return ResponseEntity.status(HttpStatus.CREATED).body(gameRepository.save(game));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Game> updateGame(@PathVariable String id, @RequestBody Game game) {
+  public ResponseEntity<Game> updateGame(@PathVariable String id, @Valid @RequestBody Game game) {
     game.setId(id);
     return ResponseEntity.status(HttpStatus.CREATED).body(gameRepository.save(game));
   }

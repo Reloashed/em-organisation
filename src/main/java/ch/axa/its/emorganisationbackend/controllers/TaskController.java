@@ -4,6 +4,7 @@ import ch.axa.its.emorganisationbackend.domain.Job;
 import ch.axa.its.emorganisationbackend.domain.Person;
 import ch.axa.its.emorganisationbackend.domain.Task;
 import ch.axa.its.emorganisationbackend.repositories.TaskRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,12 +45,12 @@ public class TaskController {
   }
 
   @PostMapping
-  public ResponseEntity<Task> createTask(@RequestBody Task task) {
+  public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) {
     return ResponseEntity.status(HttpStatus.CREATED).body(taskRepository.save(task));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Task> updateTask(@PathVariable String id, @RequestBody Task task) {
+  public ResponseEntity<Task> updateTask(@PathVariable String id, @Valid @RequestBody Task task) {
     task.setId(id);
     return ResponseEntity.status(HttpStatus.CREATED).body(taskRepository.save(task));
   }

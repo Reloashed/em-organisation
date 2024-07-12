@@ -6,6 +6,7 @@ import ch.axa.its.emorganisationbackend.domain.Person;
 import ch.axa.its.emorganisationbackend.domain.Task;
 import ch.axa.its.emorganisationbackend.repositories.GameRepository;
 import ch.axa.its.emorganisationbackend.repositories.JobRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,12 +69,12 @@ public class JobController {
   }
 
   @PostMapping
-  public ResponseEntity<Job> createJob(@RequestBody Job job) {
+  public ResponseEntity<Job> createJob(@Valid @RequestBody Job job) {
     return ResponseEntity.status(HttpStatus.CREATED).body(jobRepository.save(job));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Job> updateJob(@PathVariable String id, @RequestBody Job job) {
+  public ResponseEntity<Job> updateJob(@PathVariable String id, @Valid @RequestBody Job job) {
     job.setId(id);
     return ResponseEntity.status(HttpStatus.CREATED).body(jobRepository.save(job));
   }

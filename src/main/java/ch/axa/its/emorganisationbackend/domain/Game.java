@@ -1,12 +1,9 @@
 package ch.axa.its.emorganisationbackend.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -24,9 +21,11 @@ public class Game {
   private String id;
 
   @Column(nullable = false)
+  @NotBlank
   private LocalDate date;
 
   @Column(nullable = false)
+  @NotBlank
   private String stadium;
 
   @JsonIgnore

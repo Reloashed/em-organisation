@@ -3,6 +3,7 @@ package ch.axa.its.emorganisationbackend.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class Job {
   private String id;
 
   @Column(nullable = false)
+  @NotBlank
   private String designation;
 
   @JsonIgnore

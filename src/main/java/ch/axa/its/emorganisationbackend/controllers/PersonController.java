@@ -4,6 +4,7 @@ import ch.axa.its.emorganisationbackend.domain.Job;
 import ch.axa.its.emorganisationbackend.domain.Person;
 import ch.axa.its.emorganisationbackend.domain.Task;
 import ch.axa.its.emorganisationbackend.repositories.PersonRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,12 +45,12 @@ public class PersonController {
   }
 
   @PostMapping
-  public ResponseEntity<Person> createPerson(@RequestBody Person person) {
+  public ResponseEntity<Person> createPerson(@Valid @RequestBody Person person) {
     return ResponseEntity.status(HttpStatus.CREATED).body(personRepository.save(person));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Person> updatePerson(@PathVariable String id, @RequestBody Person person) {
+  public ResponseEntity<Person> updatePerson(@PathVariable String id, @Valid @RequestBody Person person) {
     person.setId(id);
     return ResponseEntity.status(HttpStatus.CREATED).body(personRepository.save(person));
   }
