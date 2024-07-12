@@ -33,17 +33,6 @@ public class PersonController {
     return ResponseEntity.notFound().build();
   }
 
-  @GetMapping("/{id}/jobs")
-  public ResponseEntity<Iterable<Job>> getJobsFromPerson(@PathVariable String id) {
-    Optional<Person> personOpt = personRepository.findById(id);
-    if (personOpt.isPresent()) {
-      Person person = personOpt.get();
-      return ResponseEntity.ok(person.getJobs());
-    }
-
-    return ResponseEntity.notFound().build();
-  }
-
   @PostMapping
   public ResponseEntity<Person> createPerson(@Valid @RequestBody Person person) {
     return ResponseEntity.status(HttpStatus.CREATED).body(personRepository.save(person));

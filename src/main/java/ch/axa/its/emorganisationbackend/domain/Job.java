@@ -1,6 +1,5 @@
 package ch.axa.its.emorganisationbackend.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -27,25 +26,25 @@ public class Job {
   @NotBlank
   private String designation;
 
-  @JsonIgnore
   @ManyToMany
   @JoinTable(
           name = "job_person",
           joinColumns = @JoinColumn(name = "job_id"),
           inverseJoinColumns = @JoinColumn(name = "person_id")
   )
+  @JsonIgnoreProperties("jobs")
   private Set<Person> people = new HashSet<>();
 
-  @JsonIgnore
   @OneToMany(mappedBy = "job")
+  @JsonIgnoreProperties("job")
   private Set<Task> tasks = new HashSet<>();
 
-  @JsonIgnore
   @ManyToMany
   @JoinTable(
           name = "job_game",
           joinColumns = @JoinColumn(name = "job_id"),
           inverseJoinColumns = @JoinColumn(name = "game_id")
   )
+  @JsonIgnoreProperties("jobs")
   private Set<Game> games = new HashSet<>();
 }

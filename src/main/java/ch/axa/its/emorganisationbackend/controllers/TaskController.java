@@ -33,17 +33,6 @@ public class TaskController {
     return ResponseEntity.notFound().build();
   }
 
-  @GetMapping("/{id}/job")
-  public ResponseEntity<Job> getJobFromTask(@PathVariable String id) {
-    Optional<Task> taskOpt = taskRepository.findById(id);
-    if (taskOpt.isPresent()) {
-      Task task = taskOpt.get();
-      return ResponseEntity.ok(task.getJob());
-    }
-
-    return ResponseEntity.notFound().build();
-  }
-
   @PostMapping
   public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) {
     return ResponseEntity.status(HttpStatus.CREATED).body(taskRepository.save(task));

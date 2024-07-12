@@ -1,6 +1,6 @@
 package ch.axa.its.emorganisationbackend.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -27,7 +27,7 @@ public class Task {
   @Size(max = 500)
   private String description;
 
-  @JsonIgnore
   @ManyToOne
+  @JsonIgnoreProperties("tasks")
   private Job job;
 }

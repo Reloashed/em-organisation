@@ -35,39 +35,6 @@ public class JobController {
     return ResponseEntity.notFound().build();
   }
 
-  @GetMapping("/{id}/games")
-  public ResponseEntity<Iterable<Game>> getGamesFromJob(@PathVariable String id) {
-    Optional<Job> jobOpt = jobRepository.findById(id);
-    if (jobOpt.isPresent()) {
-      Job job = jobOpt.get();
-      return ResponseEntity.ok(job.getGames());
-    }
-
-    return ResponseEntity.notFound().build();
-  }
-
-  @GetMapping("/{id}/people")
-  public ResponseEntity<Iterable<Person>> getPeopleFromJob(@PathVariable String id) {
-    Optional<Job> jobOpt = jobRepository.findById(id);
-    if (jobOpt.isPresent()) {
-      Job job = jobOpt.get();
-      return ResponseEntity.ok(job.getPeople());
-    }
-
-    return ResponseEntity.notFound().build();
-  }
-
-  @GetMapping("/{id}/tasks")
-  public ResponseEntity<Iterable<Task>> getTasksFromJob(@PathVariable String id) {
-    Optional<Job> jobOpt = jobRepository.findById(id);
-    if (jobOpt.isPresent()) {
-      Job job = jobOpt.get();
-      return ResponseEntity.ok(job.getTasks());
-    }
-
-    return ResponseEntity.notFound().build();
-  }
-
   @PostMapping
   public ResponseEntity<Job> createJob(@Valid @RequestBody Job job) {
     return ResponseEntity.status(HttpStatus.CREATED).body(jobRepository.save(job));

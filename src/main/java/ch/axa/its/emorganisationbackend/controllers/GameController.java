@@ -34,17 +34,6 @@ public class GameController {
     return ResponseEntity.notFound().build();
   }
 
-  @GetMapping("/{id}/jobs")
-  public ResponseEntity<Iterable<Job>> getJobsFromGame(@PathVariable String id) {
-    Optional<Game> gameOpt = gameRepository.findById(id);
-    if (gameOpt.isPresent()) {
-      Game game = gameOpt.get();
-      return ResponseEntity.ok(game.getJobs());
-    }
-
-    return ResponseEntity.notFound().build();
-  }
-
   @PostMapping
   public ResponseEntity<Game> createGame(@Valid @RequestBody Game game) {
     return ResponseEntity.status(HttpStatus.CREATED).body(gameRepository.save(game));

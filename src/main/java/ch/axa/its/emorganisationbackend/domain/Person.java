@@ -1,6 +1,6 @@
 package ch.axa.its.emorganisationbackend.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -41,7 +41,7 @@ public class Person {
   @NotBlank
   private String phoneNumber;
 
-  @JsonIgnore
   @ManyToMany(mappedBy = "people")
+  @JsonIgnoreProperties("people")
   private Set<Job> jobs = new HashSet<>();
 }
