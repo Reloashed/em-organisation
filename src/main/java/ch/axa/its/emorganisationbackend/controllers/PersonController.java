@@ -1,8 +1,6 @@
 package ch.axa.its.emorganisationbackend.controllers;
 
-import ch.axa.its.emorganisationbackend.domain.Job;
 import ch.axa.its.emorganisationbackend.domain.Person;
-import ch.axa.its.emorganisationbackend.domain.Task;
 import ch.axa.its.emorganisationbackend.repositories.PersonRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +17,8 @@ public class PersonController {
   private PersonRepository personRepository;
 
   @GetMapping
-  public Iterable<Person> getAllPeople() {
-    return personRepository.findAll();
+  public Iterable<Person> getAllPeople(@RequestParam(required = false) String firstname, @RequestParam(required = false) String lastname) {
+    return personRepository.filter(firstname, lastname);
   }
 
   @GetMapping("/{id}")

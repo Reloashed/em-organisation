@@ -1,10 +1,6 @@
 package ch.axa.its.emorganisationbackend.controllers;
 
-import ch.axa.its.emorganisationbackend.domain.Game;
 import ch.axa.its.emorganisationbackend.domain.Job;
-import ch.axa.its.emorganisationbackend.domain.Person;
-import ch.axa.its.emorganisationbackend.domain.Task;
-import ch.axa.its.emorganisationbackend.repositories.GameRepository;
 import ch.axa.its.emorganisationbackend.repositories.JobRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +17,8 @@ public class JobController {
   private JobRepository jobRepository;
 
   @GetMapping
-  public Iterable<Job> getAllJobs() {
-    return jobRepository.findAll();
+  public Iterable<Job> getAllJobs(@RequestParam(required = false) String designation) {
+    return jobRepository.filter(designation);
   }
 
   @GetMapping("/{id}")

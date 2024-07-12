@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Set;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, String> {
-  Set<Person> findByFirstname(String firstname);
+public interface PersonRepository extends JpaRepository<Person, String>, PersonRepositoryCustom {
 }
